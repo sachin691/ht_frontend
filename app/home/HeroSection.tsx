@@ -15,9 +15,9 @@ const heroCards = [
 
 const HeroSection = () => {
   return (
-    <div className="relative bg-white pb-16 pt-[calc(80px+1rem)]">
+    <section className="relative bg-white pb-16 pt-[calc(80px+1rem)]">
       {/* Semicircle */}
-      <div className="absolute inset-x-0 bottom-0 h-[24rem] bg-custom-orange rounded-t-[50%] z-10"></div>
+      <div className="absolute inset-x-0 bottom-0 h-[25rem] bg-custom-orange rounded-t-[50%] z-10"></div>
 
       {/* Content Section */}
       <div className="relative z-20 p-8">
@@ -42,7 +42,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
