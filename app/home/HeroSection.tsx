@@ -15,7 +15,7 @@ const heroCards = [
 
 const HeroSection = () => {
   return (
-    <section className="relative bg-white pb-16 pt-[calc(80px+1rem)]">
+    <section className="relative bg-white pb-16">
       {/* Semicircle */}
       <div className="absolute inset-x-0 bottom-0 h-[25rem] bg-custom-orange rounded-t-[50%] z-10"></div>
 
@@ -35,9 +35,9 @@ const HeroSection = () => {
 
         {/* Cards Section */}
         <div className="mt-8 flex justify-center">
-          <div className="flex flex-wrap justify-center gap-5 mt-8">
+          <div className="flex flex-wrap justify-center gap-5 mt-8 max-w-5xl mx-auto">
             {heroCards.map((card, index) => (
-              <HomeCard key={index} icon={card.icon} title={card.title} />
+              <HomeCard key={index} icon={card.icon} title={card.title} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5" />
             ))}
           </div>
         </div>

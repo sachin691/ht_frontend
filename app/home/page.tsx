@@ -64,9 +64,9 @@ const page = () => {
   return (
     <div>
       <HeroSection />
-      <section className="bg-gray-100 py-12">
+      <section className="bg-gray-100 p-4 py-8">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-semibold text-center mb-8">Choose Your Language</h2>
+          <h2 className="text-5xl font-semibold text-center mb-8">Choose Your Language</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {languagesData.map((language) => (
               <ChooseLanguageCard
@@ -85,7 +85,7 @@ const page = () => {
           <h1 className="font-semibold text-xl uppercase tracking-wide text-custom-orange px-5">Let's hear From</h1>
           <div className="w-8 h-[2px] bg-custom-orange"></div>
         </div>
-        <h2 className="font-bold text-5xl uppercase tracking-wide">Our Students</h2>
+        <h2 className="font-bold text-4xl md:text-5xl uppercase tracking-wide text-center">Our Students</h2>
         <OurStudents />
       </section>
     </div>

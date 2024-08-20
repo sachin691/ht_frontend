@@ -1,8 +1,10 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/saperator";
 import Image from "next/image";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 interface ChooseLanguageCardProps {
   imageSrc: string;
@@ -11,6 +13,7 @@ interface ChooseLanguageCardProps {
 }
 
 const ChooseLanguageCard: React.FC<ChooseLanguageCardProps> = ({ imageSrc, language, description }) => {
+  const router = useRouter();
   return (
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden border-t-custom-blue border-b-custom-orange border-2">
       <CardHeader className="p-0">
@@ -22,7 +25,7 @@ const ChooseLanguageCard: React.FC<ChooseLanguageCardProps> = ({ imageSrc, langu
         <Separator className="mt-2" />
       </CardContent>
       <CardFooter className="p-4 justify-center">
-        <Button className="bg-custom-green hover:bg-custom-orange text-white py-2 px-4 rounded transition-colors duration-300">
+        <Button className="bg-custom-green hover:bg-custom-orange text-white py-2 px-4 rounded transition-colors duration-300" onClick={() => router.push('/languages/hindi')}>
           Get Started
         </Button>
       </CardFooter>

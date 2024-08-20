@@ -1,15 +1,22 @@
 import React from "react";
 import { LucideIcon } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 interface HomeCardProps {
   icon: LucideIcon;
   title: string;
+  className?: string;
 }
 
-const HomeCard: React.FC<HomeCardProps> = ({ icon: Icon, title }) => {
+const HomeCard: React.FC<HomeCardProps> = ({ icon: Icon, title, className }) => {
   return (
-    <Card className="flex flex-col items-center justify-center p-4 bg-white hover:bg-white/10 rounded-md shadow-md hover:scale-105 w-[14rem]">
+    <Card
+      className={cn(
+        "flex flex-col items-center justify-center p-4 bg-white hover:bg-white/10 rounded-md shadow-md hover:scale-105 w-[14rem]",
+        className
+      )}
+    >
       <CardContent>
         <Icon className="w-[3rem] h-[4rem] text-custom-blue" />
       </CardContent>
