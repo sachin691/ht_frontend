@@ -82,7 +82,7 @@ const page = () => {
       <section className="flex flex-col p-4 gap-y-[2rem] justify-center items-center">
         <div className="flex items-center justify-center w-full mt-4">
           <div className="w-8 h-[2px] bg-custom-orange"></div>
-          <h1 className="font-semibold text-xl uppercase tracking-wide text-custom-orange px-5">Let's hear From</h1>
+          <h1 className="font-semibold text-xl uppercase tracking-wide text-custom-orange px-5">{`Let's hear From`}</h1>
           <div className="w-8 h-[2px] bg-custom-orange"></div>
         </div>
         <h2 className="font-bold text-4xl md:text-5xl uppercase tracking-wide text-center">Our Students</h2>
