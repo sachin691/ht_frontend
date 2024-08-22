@@ -108,7 +108,7 @@ export default function Page({ params }: { params: { name: string } }) {
             our main focus where we use pictures based on real-life situations so you can learn subconsciously. That’s
             why here is a series of Online Hindi lessons.
           </p>
-          <h1 className="text-3xl text-custom-green">What You'll Learn</h1>
+          <h1 className="text-3xl text-custom-green">{`What You'll Learn`}</h1>
           <div className="grid grid-cols-2 gap-3 p-5">
             <ul className="space-y-2">
               <li className="flex items-center">
@@ -135,7 +135,7 @@ export default function Page({ params }: { params: { name: string } }) {
                 <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
                   <Check className="text-white w-3 h-3" />
                 </div>
-                Get in-depth knowledge about India's culture along with learning languages.
+                {`Get in-depth knowledge about India's culture along with learning languages.`}
               </li>
               <li className="flex items-center">
                 <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
