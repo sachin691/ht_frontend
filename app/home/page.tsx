@@ -66,8 +66,8 @@ const page = () => {
       <HeroSection />
       <section className="bg-gray-100 p-4 py-8">
         <div className="container mx-auto">
-          <h2 className="text-5xl font-semibold text-center mb-8">Choose Your Language</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-4xl md:text-5xl font-semibold text-center mb-[4rem]">Choose Your Language</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2rem] md:gap-[5rem]">
             {languagesData.map((language) => (
               <ChooseLanguageCard
                 key={language.language}
