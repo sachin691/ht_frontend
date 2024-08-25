@@ -44,7 +44,6 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Dropdown Menu for Small Screens */}
       {isMenuOpen && (
         <div className="fixed top-14 right-0 w-full max-w-xs bg-white shadow-lg md:hidden z-50">
           <div className="flex flex-col p-4">
