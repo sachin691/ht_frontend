@@ -9,7 +9,7 @@ const JoinCourse = () => {
       <Card className="w-full shadow-md">
         <CardContent className="flex flex-col p-0 justify-center items-center">
           <iframe
-            src="https://www.youtube.com/embed/ZRXndx5iYq?autoplay=1&mute=1"
+            src="https://www.youtube.com/embed/ZRXndx5iYq"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-[15rem] rounded-md"

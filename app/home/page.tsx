@@ -62,7 +62,7 @@ const languagesData = [
 
 const page = () => {
   return (
-    <div>
+    <div className=''>
       <HeroSection />
       <section className="bg-gray-100 p-4 py-8">
         <div className="container mx-auto">

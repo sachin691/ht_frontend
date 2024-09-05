@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import TrialClass from "./TrialClass";
 import { CircleArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HomeCard from "@/components/HomeCard";
-import { Users, Rocket, MapPinCheck, Monitor, CreditCard } from "lucide-react"; // Replace these with appropriate icons
+import { Users, Rocket, MapPinCheck, Monitor, CreditCard } from "lucide-react";
+import { motion } from "framer-motion";
 
 const heroCards = [
   { icon: Users, title: "Expert Tutors" },
@@ -13,33 +15,56 @@ const heroCards = [
   { icon: CreditCard, title: "Easy Pay" },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 }, 
+  visible: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: index * 0.2,
+      type: "spring",
+      stiffness: 200,
+      damping: 20,
+    },
+  }),
+};
+
 const HeroSection = () => {
   return (
     <section className="relative bg-white pb-16">
-      {/* Semicircle */}
-      <div className="absolute inset-x-0 bottom-0 h-[25rem] bg-custom-orange rounded-t-[50%] z-10"></div>
-
-      {/* Content Section */}
       <div className="relative z-20 p-8">
-        {/* Trial Class Section */}
         <TrialClass />
-        <div className="flex justify-center mb-12">
+
+        <motion.div
+          className="flex justify-center mb-12"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          whileHover={{ rotateZ: -5, scale: 1.05 }}
+        >
           <Button
-            className="relative bg-custom-green text-white font-semibold rounded-md hover:bg-custom-blue hover:scale-105 transition-all duration-300 animate-bounce duration-800"
+            className="relative bg-custom-green text-white font-semibold rounded-md hover:bg-custom-blue transition-all duration-300"
             size={"lg"}
           >
             $0 Trial Class
             <CircleArrowRight className="ml-2" />
           </Button>
-        </div>
+        </motion.div>
 
-        {/* Cards Section */}
-        <div className="mt-8 flex justify-center">
-          <div className="flex flex-wrap justify-center gap-5 mt-8 max-w-5xl mx-auto">
-            {heroCards.map((card, index) => (
-              <HomeCard key={index} icon={card.icon} title={card.title} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5" />
-            ))}
-          </div>
+        <div className="flex flex-wrap justify-center gap-8">
+          {heroCards.map((card, index) => (
+            <motion.div
+              key={index}
+              className="flex flex-col justify-center items-center"
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={cardVariants}
+            >
+              <HomeCard icon={card.icon} title={card.title} />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

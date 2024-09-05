@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import * as React from "react";
 
 const studentsArray = [
@@ -20,102 +21,151 @@ const videosArray = [
 export function OurStudents() {
   return (
     <div className="max-w-6xl p-4 grid gap-4">
-      {/* Row 1: Video on the left, two images on the right */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2">
-          <div className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md">
+          <motion.div
+            className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <iframe
               src={videosArray[0]}
               title="Video 1"
               className="w-full h-full object-fit"
               allow="autoplay; encrypted-media"
             ></iframe>
-          </div>
+          </motion.div>
         </div>
         <div className="grid grid-rows-2 gap-4">
-          <div className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md">
+          <motion.div
+            className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <img
               src={studentsArray[0]}
               alt="Student 1"
               className="w-full h-full object-fit transition-transform duration-300 hover:scale-110"
             />
-          </div>
-          <div className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md">
+          </motion.div>
+          <motion.div
+            className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <img
               src={studentsArray[1]}
               alt="Student 2"
               className="w-full h-full object-fit transition-transform duration-300 hover:scale-110"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Row 2: Image on the left, video on the right */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="relative h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden rounded-md shadow-md">
+        <motion.div
+          className="relative h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden rounded-md shadow-md"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <img
             src={studentsArray[2]}
             alt="Student 3"
             className="w-full h-full object-fit transition-transform duration-300 hover:scale-110"
           />
-        </div>
-        <div className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md">
+        </motion.div>
+        <motion.div
+          className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <iframe
             src={videosArray[1]}
             title="Video 2"
             className="w-full h-full object-fit"
             allow="autoplay; encrypted-media"
           ></iframe>
-        </div>
+        </motion.div>
       </div>
 
       {/* Row 3: Video on the left, two images on the right */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2">
-          <div className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md">
+          <motion.div
+            className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <iframe
               src={videosArray[2]}
               title="Video 3"
               className="w-full h-full object-fit"
               allow="autoplay; encrypted-media"
             ></iframe>
-          </div>
+          </motion.div>
         </div>
         <div className="grid grid-rows-2 gap-4">
-          <div className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md">
+          <motion.div
+            className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <img
               src={studentsArray[3]}
               alt="Student 4"
               className="w-full h-full object-fit transition-transform duration-300 hover:scale-110"
             />
-          </div>
-          <div className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md">
+          </motion.div>
+          <motion.div
+            className="relative h-24 sm:h-32 md:h-36 lg:h-40 overflow-hidden rounded-md shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <img
               src={studentsArray[4]}
               alt="Student 5"
               className="w-full h-full object-fit transition-transform duration-300 hover:scale-110"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Row 4: Image on the left, video on the right */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="relative h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden rounded-md shadow-md">
+        <motion.div
+          className="relative h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden rounded-md shadow-md"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <img
             src={studentsArray[5]}
             alt="Student 6"
             className="w-full h-full object-fit transition-transform duration-300 hover:scale-110"
           />
-        </div>
-        <div className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md">
+        </motion.div>
+        <motion.div
+          className="relative h-48 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-md shadow-md"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <iframe
             src={videosArray[3]}
             title="Video 4"
             className="w-full h-full object-fit"
             allow="autoplay; encrypted-media"
           ></iframe>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
