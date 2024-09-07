@@ -96,7 +96,7 @@ export default function Page({ params }: { params: { name: string } }) {
             You never learn your first language in a university by grammatical rules...
           </p>
 
-          <h1 className="text-2xl md:text-3xl text-custom-green">What You'll Learn</h1>
+          <h1 className="text-2xl md:text-3xl text-custom-green">{`What You'll Learn`}</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4">
             <ul className="space-y-2">
               <li className="flex items-center">
