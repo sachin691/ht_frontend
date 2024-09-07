@@ -32,7 +32,7 @@ export default function Page({ params }: { params: { name: string } }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="flex flex-col justify-center items-center py-4 px-4 lg:px-20"
+      className="flex flex-col justify-center items-center p-4 lg:px-20"
     >
       <motion.div
         initial={{ y: -50, opacity: 0 }}
@@ -64,7 +64,7 @@ export default function Page({ params }: { params: { name: string } }) {
           transition={{ delay: 0.5, duration: 1 }}
           className="flex flex-col justify-center items-center text-center"
         >
-          <h1 className="text-3xl md:text-4xl font-bold leading-loose">Experience the power of</h1>
+          <h1 className="text-4xl md:text-4xl font-bold leading-normal">Experience the power of</h1>
           <h1 className="text-3xl md:text-4xl font-bold">
             <motion.span
               key={words[index]}
@@ -83,9 +83,9 @@ export default function Page({ params }: { params: { name: string } }) {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 1 }}
-        className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8 mt-4 py-8 w-full"
+        className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8 mt-4 py-8"
       >
-        <div className="flex flex-col space-y-8 w-full lg:w-2/3 items-start">
+        <div className="flex flex-col space-y-8 w-full lg:w-2/3 items-start px-5">
           <h1 className="text-2xl md:text-3xl text-custom-green">About This Course</h1>
           <p className="text-sm md:text-base">
             Our online Hindi lesson learning course offers a distinctive language learning approach...

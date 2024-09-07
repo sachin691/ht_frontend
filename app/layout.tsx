@@ -22,9 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("min-h-screen flex flex-col bg-background font-sans antialiased", roboto.className)}>
+      <body className={cn("min-h-screen p-0 flex flex-col bg-background font-sans antialiased", roboto.className)}>
         <Navbar />
-        <main className="max-w-7xl mx-auto">{children}</main>
+        <main className="">{children}</main>
         <Footer />
       </body>
     </html>
