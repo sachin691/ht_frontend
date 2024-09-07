@@ -32,7 +32,7 @@ const cardVariants = {
 const HeroSection = () => {
   return (
     <section className="relative bg-white pb-16">
-      <div className="relative z-20 p-8">
+      <div className="relative z-20 px-8">
         <TrialClass />
 
         <motion.div
