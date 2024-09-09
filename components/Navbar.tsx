@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../components/ui/button";
 import { useRouter } from "next/navigation";
 import { MyDrawer } from "./ui/myDrawer";
 import { motion } from "framer-motion";
@@ -119,7 +118,7 @@ const Navbar = () => {
               Request Demo
             </DialogTrigger>
           </motion.div>
-          <DialogContent className="min-w-[60rem] min-h-[30rem] h-auto">
+          <DialogContent className="w-full md:min-w-[60rem] min-h-[30rem] h-auto">
             <DialogHeader>
               <DialogTitle className="text-center text-3xl">Request Demo</DialogTitle>
               <DialogDescription className="h-full">

@@ -1,16 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import { Drawer } from "vaul";
-import { Button } from "./button";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import DemoForm from "../DemoForm";
+
 export function MyDrawer() {
-    const router = useRouter();
+  const router = useRouter();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setDrawerOpen(false); // Close the drawer
+    setDialogOpen(true); // Open the dialog
+  };
+
   return (
-    <Drawer.Root direction="right">
+    <Drawer.Root direction="right" open={drawerOpen} onOpenChange={setDrawerOpen}>
       <Drawer.Trigger asChild>
-        <Menu className="w-6 h-6 cursor-pointer" />
+        <Menu className="w-6 h-6 cursor-pointer" onClick={() => setDrawerOpen(true)} />
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/50 md:hidden" />
@@ -39,14 +58,32 @@ export function MyDrawer() {
                 <a href="#" className="hover:text-[#FF671F]" onClick={() => router.push("/languages")}>
                   Languages
                 </a>
-                <a href="#">
-                  <Button className="bg-[#FF671F] hover:bg-[#046A38] text-base px-6 py-3 w-full">Request Demo</Button>
-                </a>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <button
+                    className="bg-[#FF671F] hover:bg-[#046A38] text-sm md:text-base text-white px-3 py-2 md:px-6 md:py-2 rounded-md"
+                    onClick={handleOpenDialog}
+                  >
+                    Request Demo
+                  </button>
+                </motion.div>
               </div>
             </div>
           </div>
         </Drawer.Content>
       </Drawer.Portal>
+
+      {dialogOpen && (
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent className="min-w-[60rem] min-h-[30rem] h-auto">
+            <DialogHeader>
+              <DialogTitle className="text-center text-3xl">Request Demo</DialogTitle>
+              <DialogDescription className="h-full">
+                <DemoForm />
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      )}
     </Drawer.Root>
   );
 }
