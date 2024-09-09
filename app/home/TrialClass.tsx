@@ -39,7 +39,7 @@ const TrialClass: React.FC<TrialClassProps> = ({ animationType = "rotate" }) => 
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 p-0 md:p-[2rem] gap-6 md:gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 p-0 md:px-[2rem] md:py-[1rem] gap-6 md:gap-8">
       <motion.div className="flex flex-col gap-4 p-4" initial="hidden" animate="visible" variants={textVariants}>
         <motion.h1
           className="text-3xl md:text-6xl font-semibold"
