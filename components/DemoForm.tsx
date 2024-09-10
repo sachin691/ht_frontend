@@ -3,21 +3,22 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { Clock } from "lucide-react";
+import { Clock, ArrowLeft } from "lucide-react"; // Import the ArrowLeft icon
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
+import DetailsForm from "./DetailsForm";
 
 const generateTimeSlots = () => {
   const times = [];
-  let start = 10 * 60; // Start at 10:00 AM (in minutes)
-  const end = 18 * 60; // End at 6:00 PM (in minutes)
+  let start = 10 * 60;
+  const end = 18 * 60;
 
   while (start < end) {
     const hours = Math.floor(start / 60);
     const minutes = start % 60;
     const time = `${hours > 12 ? hours - 12 : hours}:${minutes === 0 ? "00" : minutes} ${hours >= 12 ? "PM" : "AM"}`;
     times.push(time);
-    start += 30; // Increment by 30 minutes
+    start += 30;
   }
 
   return times;
@@ -27,7 +28,7 @@ const DemoForm = () => {
   const router = useRouter();
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [dateSelected, setDateSelected] = useState(false);
-  const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined); // Add state for selected time slot
+  const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined);
 
   const timeSlots = generateTimeSlots();
 
@@ -40,47 +41,60 @@ const DemoForm = () => {
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
-    // You can add additional logic here if needed, e.g., saving the time slot or proceeding to the next step
   };
 
   return (
-    <div className="p-0 md:p-6 lg:p-8">
-      <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-        <div className="flex flex-col items-center md:items-start w-full md:w-1/2">
+    <div className="p-4 md:p-6 lg:p-8">
+      <div className="flex flex-col lg:flex-row justify-center gap-6 lg:gap-12 w-full">
+        {/* Left section: Logo, Heading, and Badge */}
+        <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2">
           <Image
             src="https://i0.wp.com/hindustanitongue.com/wp-content/uploads/2022/09/Hindustani-Tongue-Horizontal-Color.png?fit=3646%2C1298&ssl=1"
             alt="Hindustani Tongue Logo"
-            width={250}
-            height={250}
-            className="cursor-pointer mb-4 md:mb-6"
+            width={200}
+            height={200}
+            className="cursor-pointer mb-4 lg:mb-6"
             onClick={() => router.push("/home")}
           />
-          <h1 className="text-black text-2xl font-semibold text-center md:text-left mb-2">Hindustani Tongue</h1>
+          <h1 className="text-black text-2xl lg:text-3xl font-semibold text-center lg:text-left mb-2 lg:mb-4">
+            Hindustani Tongue
+          </h1>
+
+          {date && selectedTime && (
+            <div className="bg-gray-100 rounded-lg p-4 shadow-md mb-4 w-full max-w-md">
+              <h2 className="text-xl font-semibold">Selected Date and Time</h2>
+              <p className="text-gray-700">{date.toDateString()}</p>
+              <p className="text-gray-700">{selectedTime}</p>
+            </div>
+          )}
+
           <Badge variant="outline" className="w-full max-w-xs mb-4 flex items-center justify-center space-x-2 py-2">
             <Clock className="w-4 h-4" />
             <span>30 Minutes</span>
           </Badge>
-          <p className="text-xl text-center md:text-left">Choose a time that works for you.</p>
+
+          <p className="text-xl text-center lg:text-left">Choose a time that works for you.</p>
         </div>
 
-        <div className="flex justify-center items-center w-full md:w-1/2">
+        {/* Right section: Calendar and Time Slots */}
+        <div className="flex justify-center items-center w-full lg:w-1/2">
           {!dateSelected ? (
             <Calendar
               mode="single"
               selected={date}
               onSelect={handleDateSelect}
-              className="md:w-full h-full rounded-md border p-4 sm:p-6 lg:p-8"
+              className="w-full h-full rounded-md border p-4 sm:p-6 lg:p-8"
             />
-          ) : (
-            <div className="flex flex-col gap-y-4 w-full">
+          ) : !selectedTime ? (
+            <div className="flex flex-col gap-y-4 w-full max-w-lg">
               <h2 className="text-xl font-semibold text-center">Select a Time Slot</h2>
               <div className="overflow-y-auto max-h-[20rem] p-4 border rounded-md space-y-2">
                 {timeSlots.map((time, index) => (
                   <Button
                     key={index}
                     variant="outline"
-                    className={`w-full ${selectedTime === time ? "bg-custom-orange text-white" : ""}`} // Optional: Highlight selected time
-                    onClick={() => handleTimeSelect(time)} // Update the time slot state on click
+                    className={`w-full ${selectedTime === time ? "bg-custom-orange text-white" : ""}`}
+                    onClick={() => handleTimeSelect(time)}
                   >
                     {time}
                   </Button>
@@ -92,12 +106,24 @@ const DemoForm = () => {
                   onClick={() => {
                     setDateSelected(false);
                     setDate(undefined);
-                    setSelectedTime(undefined); // Reset selected time slot when going back to calendar
+                    setSelectedTime(undefined);
                   }}
                 >
                   Go Back to Calendar
                 </Button>
               </div>
+            </div>
+          ) : (
+            <div className="w-full max-w-md">
+              <div
+                className="flex items-center mb-4 cursor-pointer text-custom-blue hover:scale-105"
+                onClick={() => setSelectedTime(undefined)}
+              >
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                <span>Back</span>
+              </div>
+
+              <DetailsForm />
             </div>
           )}
         </div>

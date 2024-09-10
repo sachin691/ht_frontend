@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import DemoForm from "./DemoForm";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   const router = useRouter();
@@ -112,21 +113,13 @@ const Navbar = () => {
           )}
         </Link>
 
-        <Dialog>
+        <Link href={`/request-demo`}>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <DialogTrigger className="bg-[#FF671F] hover:bg-[#046A38] text-sm md:text-base text-white px-3 py-2 md:px-6 md:py-2 rounded-md">
+            <Button className="bg-[#FF671F] hover:bg-[#046A38] text-sm md:text-base text-white px-3 py-2 md:px-6 md:py-2 rounded-md">
               Request Demo
-            </DialogTrigger>
+            </Button>
           </motion.div>
-          <DialogContent className="w-full md:min-w-[60rem] min-h-[30rem] h-auto">
-            <DialogHeader>
-              <DialogTitle className="text-center text-3xl">Request Demo</DialogTitle>
-              <DialogDescription className="h-full">
-                <DemoForm />
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+        </Link>
       </div>
     </div>
   );
