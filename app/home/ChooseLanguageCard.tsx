@@ -48,7 +48,7 @@ const ChooseLanguageCard: React.FC<ChooseLanguageCardProps> = ({ imageSrc, langu
         <CardFooter className="p-4 justify-center">
           <Button
             className="bg-custom-green hover:bg-custom-orange text-white py-2 px-4 rounded transition-colors duration-300"
-            onClick={() => router.push("/languages/hindi")}
+            onClick={() => router.push(`/languages/${language}`)}
           >
             Get Started
           </Button>

@@ -8,9 +8,43 @@ import AnyQuestion from "@/components/AnyQuestion";
 import Curriculam from "@/components/Curriculam";
 
 export default function Page({ params }: { params: { name: string } }) {
+  // State variables for language data
+  const [languageData, setLanguageData] = useState({
+    name: "",
+    aboutThisCourse: "",
+    ourMethod: "",
+    whatYoullLearn: [] as string[],
+    requirements: [] as string[],
+  });
+
   const [index, setIndex] = useState(0);
   const words = ["Immersion", "Acquisition", "Visualization"];
 
+  // Fetch language data
+  const fetchLanguage = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/language/${params.name}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch language data: ${response.statusText}`);
+      }
+      const data = await response.json();
+      setLanguageData(data); // Set the fetched data into state
+    } catch (error) {
+      console.error("Error fetching language data:", error);
+    }
+  };
+
+  // Call fetchLanguage when the component mounts
+  useEffect(() => {
+    fetchLanguage();
+  }, [params.name]);
+
+  // Text animation
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
@@ -40,7 +74,7 @@ export default function Page({ params }: { params: { name: string } }) {
         transition={{ duration: 0.5 }}
         className="bg-custom-orange w-full text-center rounded-md p-4 text-white"
       >
-        <h1 className="text-xl md:text-3xl">Online {params.name} Lessons</h1>
+        <h1 className="text-xl md:text-3xl">Online {languageData.name} Lessons</h1>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full px-4 items-center justify-center mt-4">
@@ -86,30 +120,47 @@ export default function Page({ params }: { params: { name: string } }) {
         className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8 mt-4 py-8"
       >
         <div className="flex flex-col space-y-8 w-full lg:w-2/3 items-start px-5">
+          {/* About This Course */}
           <h1 className="text-2xl md:text-3xl text-custom-green">About This Course</h1>
-          <p className="text-sm md:text-base">
-            Our online Hindi lesson learning course offers a distinctive language learning approach...
-          </p>
+          <p className="text-sm md:text-base">{languageData.aboutThisCourse}</p>
 
+          {/* Our Method */}
           <h1 className="text-2xl md:text-3xl text-custom-green">Our Method</h1>
-          <p className="text-sm md:text-base">
-            You never learn your first language in a university by grammatical rules...
-          </p>
+          <p className="text-sm md:text-base">{languageData.ourMethod}</p>
 
+          {/* What You'll Learn */}
           <h1 className="text-2xl md:text-3xl text-custom-green">{`What You'll Learn`}</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4">
+            {/* Left column (first 3 entries) */}
             <ul className="space-y-2">
-              <li className="flex items-center">
-                <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
-                  <Check className="text-white w-3 h-3" />
-                </div>
-                Basic communication in Hindi in everyday situations.
-              </li>
+              {languageData.whatYoullLearn.slice(0, 3).map((item, index) => (
+                <li key={index} className="flex items-center">
+                  <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
+                    <Check className="text-white w-3 h-3" />
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            {/* Right column (remaining entries) */}
+            <ul className="space-y-2">
+              {languageData.whatYoullLearn.slice(3).map((item, index) => (
+                <li key={index + 3} className="flex items-center">
+                  <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
+                    <Check className="text-white w-3 h-3" />
+                  </div>
+                  {item}
+                </li>
+              ))}
             </ul>
           </div>
+          {/* Requirements */}
           <h1 className="text-2xl md:text-3xl text-custom-green">Requirements</h1>
           <ul className="space-y-2 p-4 list-disc">
-            <li>No previous knowledge of Hindi is necessary.</li>
+            {languageData.requirements.map((requirement, index) => (
+              <li key={index}>{requirement}</li>
+            ))}
           </ul>
 
           <Curriculam />

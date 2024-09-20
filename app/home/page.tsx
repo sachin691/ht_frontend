@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import HeroSection from './HeroSection'
 import ChooseLanguageCard from './ChooseLanguageCard';
 import { OurStudents } from './OurStudents';
@@ -61,6 +62,22 @@ const languagesData = [
 ];
 
 const page = () => {
+  const getUserTimezone = () => {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log("User's timezone:", timezone);
+    return timezone;
+  };
+  const getUserCountry = async () => {
+    const response = await fetch("https://ipapi.co/json/");
+    const data = await response.json();
+    console.log("User's country:", data.country_name);
+    return data.country_name;
+  };
+
+  useEffect(() => {
+    getUserTimezone();
+    getUserCountry();
+  }, []);
   return (
     <div className=''>
       <HeroSection />
