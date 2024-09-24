@@ -12,6 +12,7 @@ const BuyCourse: React.FC = () => {
   const numberRef = useRef<HTMLInputElement>(null);
 
   const loadRazorpay = () => {
+    console.log('start loading script....')
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
@@ -20,15 +21,30 @@ const BuyCourse: React.FC = () => {
   };
 
   const displayRazorpay = async () => {
-    const res = await fetch("/api/payment/orders");
-    const { orderId, amount } = await res.json();
-
+    console.log('start loading razorpay.......')
+    const name = nameRef.current?.value;
+    const email = emailRef.current?.value;
+    const phone = numberRef.current?.value;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payment/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+      }),
+    });
+    const data = await res.json();
+    console.log('response data ===> ', data);
+    const { amount, orderId} = data;
     const options = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY || "",
       amount: amount,
       currency: "INR",
-      name: "TRAVELMAGNET INFOTECH PRIVATE LIMITED",
-      description: "Service Purchase",
+      name: "Hindustani Tongue",
+      description: "Course Purchase",
       order_id: orderId,
       handler: async (response: any) => {
         const data = {
@@ -50,58 +66,57 @@ const BuyCourse: React.FC = () => {
   };
 
   return (
-    <div className="p-4">
-      <form onSubmit={loadRazorpay} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-  sm font-medium mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            ref={nameRef}
-            required
-            className="border border-gray-300 rounded-md p-2 w-full"
-            placeholder="Enter your name"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            ref={emailRef}
-            required
-            className="border border-gray-300 rounded-md p-2 w-full"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div>
-          <label htmlFor="number" className="block text-sm font-medium mb-1">
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            id="number"
-            ref={numberRef}
-            required
-            className="border border-gray-300 rounded-md p-2 w-full"
-            placeholder="Enter your phone number"
-          />
-        </div>
-        <div className="flex items-center justify-center">
-          <Button
-            type="submit"
-            className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 flex items-center"
-          >
-            <CreditCard className="w-4 h-4 mr-2" />
-            Proceed Payment
-          </Button>
-          <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-        </div>
-      </form>
+    <div className="p-4 space-y-2">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium mb-1">
+          Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          ref={nameRef}
+          required
+          className="border border-gray-300 rounded-md p-2 w-full"
+          placeholder="Enter your name"
+        />
+      </div>
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium mb-1">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          ref={emailRef}
+          required
+          className="border border-gray-300 rounded-md p-2 w-full"
+          placeholder="Enter your email"
+        />
+      </div>
+      <div>
+        <label htmlFor="number" className="block text-sm font-medium mb-1">
+          Phone Number
+        </label>
+        <input
+          type="tel"
+          id="number"
+          ref={numberRef}
+          required
+          className="border border-gray-300 rounded-md p-2 w-full"
+          placeholder="Enter your phone number"
+        />
+      </div>
+      <div className="flex items-center justify-center">
+        <Button
+          type="submit"
+          className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 flex items-center"
+          onClick={loadRazorpay}
+        >
+          <CreditCard className="w-4 h-4 mr-2" />
+          Proceed Payment
+        </Button>
+        <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+      </div>
     </div>
   );
 };
