@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { Clock, ArrowLeft } from "lucide-react"; // Import the ArrowLeft icon
+import { Clock, ArrowLeft } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import DetailsForm from "./DetailsForm";
@@ -29,6 +29,14 @@ const DemoForm = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [dateSelected, setDateSelected] = useState(false);
   const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    age: "",
+    language: "",
+  });
 
   const timeSlots = generateTimeSlots();
 
@@ -43,10 +51,20 @@ const DemoForm = () => {
     setSelectedTime(time);
   };
 
+  const handleFormChange = (field: string, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
+  const handleConfirmBooking = () => {
+    console.log("Booking Confirmed with details: ", formData, date, selectedTime);
+  };
+
   return (
     <div className="p-4 md:p-6 lg:p-8">
       <div className="flex flex-col lg:flex-row justify-center gap-6 lg:gap-12 w-full">
-        {/* Left section: Logo, Heading, and Badge */}
         <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2">
           <Image
             src="https://i0.wp.com/hindustanitongue.com/wp-content/uploads/2022/09/Hindustani-Tongue-Horizontal-Color.png?fit=3646%2C1298&ssl=1"
@@ -76,7 +94,6 @@ const DemoForm = () => {
           <p className="text-xl text-center lg:text-left">Choose a time that works for you.</p>
         </div>
 
-        {/* Right section: Calendar and Time Slots */}
         <div className="flex justify-center items-center w-full lg:w-1/2">
           {!dateSelected ? (
             <Calendar
@@ -123,7 +140,7 @@ const DemoForm = () => {
                 <span>Back</span>
               </div>
 
-              <DetailsForm />
+              <DetailsForm onFormChange={handleFormChange} onConfirmBooking={handleConfirmBooking} />
             </div>
           )}
         </div>

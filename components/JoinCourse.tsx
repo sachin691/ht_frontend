@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
+import BuyCourse from "@/components/BuyCourse"
 import { Book, User, Video, CheckCircle, ShieldCheck } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
-const JoinCourse = () => {
+interface joinCourseParams {
+  language: string;
+}
+
+const JoinCourse = ({ language }: joinCourseParams) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
+
   return (
     <div className="p-4 w-full">
       <Card className="w-full shadow-md">
@@ -15,7 +37,9 @@ const JoinCourse = () => {
             className="w-full h-[15rem] rounded-md"
           ></iframe>
           <div className="flex flex-col gap-y-[3rem] items-center justify-center py-[2rem]">
-            <Button className="px-[6rem] bg-custom-orange hover:bg-custom-blue duration-500">Join Course</Button>
+            <Button className="px-[6rem] bg-custom-orange hover:bg-custom-blue duration-500" onClick={handleOpenDialog}>
+              Join Course
+            </Button>
             <Button className="px-[4rem] bg-custom-green hover:bg-custom-blue duration-500">Trial Lesson</Button>
           </div>
           <div className="flex flex-col px-[1rem] py-[2rem] justify-center items-center">
@@ -45,6 +69,17 @@ const JoinCourse = () => {
           </div>
         </CardContent>
       </Card>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} >
+        <DialogContent className="w-full md:w-auto md:min-w-[30rem] h-auto rounded-md">
+          <DialogHeader>
+            <DialogTitle className="text-center">{`Buy ${language.toLowerCase()} language full course`}</DialogTitle>
+            <DialogDescription className="text-center">
+              Please fill in your details.
+            </DialogDescription>
+          </DialogHeader>
+          <BuyCourse />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

@@ -167,7 +167,7 @@ export default function Page({ params }: { params: { name: string } }) {
         </div>
 
         <div className="flex flex-col space-y-8 w-full lg:w-1/3 items-start">
-          <JoinCourse />
+          <JoinCourse language={params.name}/>
           <AnyQuestion />
         </div>
       </motion.div>
